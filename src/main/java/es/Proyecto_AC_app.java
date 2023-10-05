@@ -15,8 +15,8 @@ public class Proyecto_AC_app {
     public static void main(String[] args) {
         Logger logger = LogManager.getRootLogger();
   
-        logger.trace("Entrada a la clase principal");
-        logger.error("Prueba de un error");
+        //logger.trace("Entrada a la clase principal");
+        //logger.error("Prueba de un error");
         
         String rutaCarpetaCliente =".\\Clientes";
         File Clientes = new File(rutaCarpetaCliente);
