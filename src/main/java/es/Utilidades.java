@@ -70,9 +70,6 @@ public class Utilidades {
 
     }
 
-    /*
-    *Falta la comprobacion de que sea 9 si o si 
-    */
     public String PedirNIF() throws IOException {
         String NIF,NC;
         do {
@@ -80,26 +77,39 @@ public class Utilidades {
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             System.out.print("NIF --> ");
             NIF = br.readLine();
-            NC=NIF;
-            NC=NC.trim();
-        } while (NIF != null && NIF.trim().isEmpty() && NC.length()!=9);
+            NC=NIF.trim();
+       
+        } while (NIF== null || NC.length()!=9||NC.isEmpty());
         return NIF;
 
     }
-    /*
-    *Falta las condiciones de que sean si o si en 9 
-    */
-    public String PedirTLF() throws IOException {
+
+    
+   
+     public String PedirTLF() throws IOException {
         String tlf,tlfC;
+        do {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        System.out.print("TLF --> ");
+        tlf = br.readLine();
+        tlf = tlf.trim();
+    } while (tlf == null || tlf.isEmpty() || tlf.length() != 9);
+    return tlf;
+    }
+     
+     //Falta cambiar si en vez de la edad vamos a pedir la fecha de nacimiento
+    public int PedirEdad() throws IOException {
+        int edad;
+        String edadS;
         do {
 
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-            System.out.print("NIF --> ");
-            tlf = br.readLine();
-            tlfC=tlf;
-            tlfC=tlfC.trim();
-        } while (tlf != null && tlf.trim().isEmpty() && tlfC.length()!=9);
-        return tlf;
+            System.out.print("Edad --> ");
+           edadS = br.readLine();
+           
+        } while (edadS.isEmpty());
+        edad=Integer.parseInt(edadS);
+        return edad;
 
     }
     
