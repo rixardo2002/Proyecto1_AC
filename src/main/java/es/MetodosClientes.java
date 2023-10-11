@@ -8,30 +8,38 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-
-
+import static es.Utilidades.*;
 public class MetodosClientes {
 
     /**
-     * 
+     *
      * @author Ricardo Gómez Bastante Ricardo Gómez Ramos
      */
-    public static Cliente crearCliente() {
+    public static Cliente crearCliente() throws IOException {
+        Utilidades u= new Utilidades();
+        String nombre=u.PedirNombre();
+        String telef=u.PedirTLF();
+        String ciudad=u.PedirCiudad();
+        int edad=u.PedirEdad();
+        String nif=u.PedirNIF();
+        
+        
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        Cliente c = new Cliente("Patricia", "672456732", "Ciudad Real", 20);
+        Cliente c = new Cliente(nombre, telef, ciudad, edad,nif);
         return c;
     }
-/**
-     * 
-     * @author Ricardo Gómez Bastante 
+
+    /**
+     *
+     * @author Ricardo Gómez Bastante
      */
-    public static void clienteAFile() throws IOException {
+    public static void clienteAFile(Cliente cliente) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        Cliente cli = MetodosClientes.crearCliente();
-        File f = new File(".\\clientes\\" + cli.getNombre() + ".txt");//declara fichero
         
-    boolean salir=false;
-            
+        File f = new File(".\\clientes\\" + cliente.getNombre() + ".txt");//declara fichero
+
+        boolean salir = false;
+
         if (!f.exists()) {
             f.createNewFile();
         } else {
@@ -40,40 +48,45 @@ public class MetodosClientes {
                 String nombre;
                 nombre = br.readLine();
 
-                if (!nombre.equals(cli.getNombre())) {
-                    cli.setNombre(nombre);
-                    f = new File(".\\clientes\\" + cli.getNombre() + ".txt");
+                if (!nombre.equals(cliente.getNombre())) {
+                    cliente.setNombre(nombre);
+                    f = new File(".\\clientes\\" + cliente.getNombre() + ".txt");
                     f.createNewFile();
-                     salir=true;
-                    
+                    salir = true;
+
                 }
             } while (!salir);
+            
 
         }
         FileWriter fw = new FileWriter(f); //crear el flujo de salida
-        fw.write(cli.toString());
+        fw.write(cliente.toString());
         fw.flush();
         fw.close();
     }
 
-//    public static void clienteDesdeFile() {
-//        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-//        try {
-//            System.out.println("Dime el nombre de Cliente que estas buscando");
-//
-//            File f = new File(".\\clientes\\" + cli.getNombre() + ".txt");//declara fichero
-//            BufferedReader fbr = new BufferedReader(new FileReader(f, StandardCharsets.UTF_8));
-//
-//            String linea;
-//            while ((linea = fbr.readLine()) != null) {
-//                System.out.println(linea);
-//            }
-//
-//            fbr.close();
-//        } catch (FileNotFoundException fn) {
-//            System.out.println("No se encuentra el fichero en la ruta indicada");
-//        } catch (IOException io) {
-//            System.out.println("Error de E/S ");
-//        }
-//    }
+    public static void clienteDesdeFile() {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String nombre;
+
+        try {
+            System.out.println("Dime el nombre de Cliente que estas buscando");
+            nombre=br.readLine();
+            File f = new File(".\\clientes\\" + nombre + ".txt");//declara fichero
+            BufferedReader fbr = new BufferedReader(new FileReader(f, StandardCharsets.UTF_8));
+
+            String linea;
+            
+            while ((linea = fbr.readLine()) != null) {
+                System.out.println(linea);
+            }
+
+            fbr.close();
+        } catch (FileNotFoundException fn) {
+            System.out.println("No se encuentra el fichero en la ruta indicada");
+        } catch (IOException io) {
+            System.out.println("Error de E/S ");
+        }
+    }
+
 }

@@ -16,6 +16,7 @@ public class Cliente {
     private String numeroTlf;
     private String ciudad;
     private int edad;
+    private String nif;
 
     //Getter de la clase cliente
     public String getNombre() {
@@ -33,6 +34,15 @@ public class Cliente {
     public int getEdad() {
         return edad;
     }
+
+    public String getNif() {
+        return nif;
+    }
+
+    public void setNif(String nif) {
+        this.nif = nif;
+    }
+    
     //setter de la clase cliente
 
     public void setNombre(String nombre) {
@@ -56,17 +66,20 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(String nombre, String numeroTlf, String ciudad, int edad) {
+    public Cliente(String nombre, String numeroTlf, String ciudad, int edad,String nif) {
         this.nombre = nombre;
         this.numeroTlf = numeroTlf;
         this.ciudad = ciudad;
         this.edad = edad;
+        this.nif = nif;
     }
 
     @Override
     public String toString() {
-        return "Cliente{" + "nombre=" + nombre + ", numeroTlf=" + numeroTlf + ", ciudad=" + ciudad + ", edad=" + edad + '}';
+        return "Cliente{" + "nombre=" + nombre + ", numeroTlf=" + numeroTlf + ", ciudad=" + ciudad + ", edad=" + edad + ", nif=" + nif + '}';
     }
+
+    
     
     
     
