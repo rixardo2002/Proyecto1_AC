@@ -114,6 +114,49 @@ public class Utilidades {
     }
     
     
+    
+     public void MenúConcesionario() {
+
+        System.out.println("******************************************************************");
+        System.out.println("******************************************************************");
+        System.out.println("**                      MENÚ CONCESIONARIO                      **");
+        System.out.println("******************************************************************");
+        System.out.println("******************************************************************");
+
+        System.out.println("****************************************");
+        System.out.println("****************************************");
+        System.out.println("******* 1.Crear Concesionario     ******");
+        System.out.println("******* 2.Borrar Concesionario    ******");
+        System.out.println("******* 3.Modificar Concesionario ******");
+        System.out.println("******* 4.Salir                   ******");
+        System.out.println("****************************************");
+        System.out.println("****************************************");
+
+    }
+
+    public char[] PedirNombreConcesionario() throws IOException {
+
+        //char nombre[16];
+        String name;
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Nombre-->");
+        name = br.readLine();
+
+        char nombre[] = name.toCharArray();
+
+        return nombre;
+
+    }
+
+    public char[] PedirLocalidadConcesionario() throws IOException {
+        String name;
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Localidad-->");
+        name = br.readLine();
+        char localidad[] = name.toCharArray();
+        return localidad;
+    }
+    
     /*
     *Ver despues bien que le pasa al cls que no borra la pantalla 
     */
