@@ -1,11 +1,13 @@
 package es;
 
+import java.io.Serializable;
+
 
 /**
  *
  * @author Julián Bastante
  */
-final class Concesionario {
+final class Concesionario implements Serializable {
 
     
     private int id;

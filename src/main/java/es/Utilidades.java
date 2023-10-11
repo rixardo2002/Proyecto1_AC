@@ -134,7 +134,7 @@ public class Utilidades {
 
     }
 
-    public char[] PedirNombreConcesionario() throws IOException {
+    public String PedirNombreConcesionario() throws IOException {
 
         //char nombre[16];
         String name;
@@ -142,19 +142,19 @@ public class Utilidades {
         System.out.println("Nombre-->");
         name = br.readLine();
 
-        char nombre[] = name.toCharArray();
+       
 
-        return nombre;
+        return name;
 
     }
 
-    public char[] PedirLocalidadConcesionario() throws IOException {
+    public String PedirLocalidadConcesionario() throws IOException {
         String name;
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Localidad-->");
         name = br.readLine();
-        char localidad[] = name.toCharArray();
-        return localidad;
+       
+        return name;
     }
     
     /*
