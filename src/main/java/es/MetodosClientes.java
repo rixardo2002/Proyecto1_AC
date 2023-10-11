@@ -88,5 +88,75 @@ public class MetodosClientes {
             System.out.println("Error de E/S ");
         }
     }
+    
+    
+    public static void modificarCliente(Cliente cliente) {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        Utilidades u= new Utilidades();
+
+    try {
+        String nombre = cliente.getNombre();
+        File f = new File(".\\clientes\\" + nombre + ".txt");// Declara el fichero
+
+        if (f.exists()) {
+            BufferedReader fbr = new BufferedReader(new FileReader(f, StandardCharsets.UTF_8));
+
+            String linea;
+            StringBuilder clienteData = new StringBuilder();
+
+            // Lee el contenido del archivo y almacena los datos en clienteData
+            while ((linea = fbr.readLine()) != null) {
+                clienteData.append(linea).append("\n");
+            }
+
+            fbr.close();        
+            System.out.println("Datos actuales del cliente:");
+            System.out.println(clienteData);
+
+            
+            System.out.println("Ingresa los nuevos datos (Deja en blanco para mantener los datos actuales):");
+
+            
+            String nuevoNombre;
+            nuevoNombre=u.PedirNombre();
+             cliente.setNombre(nuevoNombre);
+            
+
+            String nuevoTelef;
+            nuevoTelef=u.PedirTLF();
+            cliente.setNumeroTlf(nuevoTelef);
+             
+            String nuevaCiudad;
+            nuevaCiudad=u.PedirCiudad();
+            cliente.setCiudad(nuevaCiudad);
+            
+
+            
+            int nuevaEdad;
+            nuevaEdad=u.PedirEdad();
+            cliente.setEdad(nuevaEdad);
+            
+            String nuevoNIF;  
+            nuevoNIF=u.PedirNIF();
+            cliente.setNif(nuevoNIF);
+
+            
+            FileWriter fw = new FileWriter(f);
+            fw.write(cliente.toString());
+            fw.flush();
+            fw.close();
+
+            System.out.println("Cliente modificado con éxito");
+        } else {
+            System.out.println("El archivo del cliente no existe");
+        }
+    } catch (IOException e) {
+        System.out.println("Error de E/S: " + e.getMessage());
+    }
+}
+
+
+    
+    
 
 }
