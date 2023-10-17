@@ -1,0 +1,1 @@
+Cliente{nombre=Jaime, numeroTlf=789456123, ciudad=Almaden, edad=22, nif=789456123}

@@ -29,7 +29,7 @@ public class Proyecto_AC_app {
         //logger.trace("Entrada a la clase principal");
         //logger.error("Prueba de un error");
         //String rutaCarpetaCliente = ".\\clientes";
-        boolean salir = true;
+        boolean salir = false;
         do {
             U.MenúDeInicio();
             leer = br.readLine();
@@ -48,8 +48,9 @@ public class Proyecto_AC_app {
 
                             break;
                         case 2:
-                            U.PedirNIF();
-                            String nif=br.readLine();
+                            String nif;
+                          nif=  U.PedirNIF();
+                            
                             MetodosClientes.eliminarCliente(nif);
                             break;
                         case 3:
