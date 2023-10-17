@@ -69,11 +69,12 @@ public class MetodosConcesionario {
         return concesionario;
 
     }
+
     /**
      *
      * @author Ricardo Gómez Ramos
      * @param concesionarioBuscado
-     * @return 
+     * @return
      * @throws java.io.IOException
      */
     public Concesionario BuscarConcesionario(int idBuscado) throws IOException {
@@ -81,7 +82,7 @@ public class MetodosConcesionario {
         Concesionario concesionario;
         int id;
         String nombre, localidad;
-        DataInputStream dIS = new DataInputStream(new FileInputStream( f));
+        DataInputStream dIS = new DataInputStream(new FileInputStream(f));
         try {
             while (true) {
                 id = dIS.readInt();
@@ -90,18 +91,25 @@ public class MetodosConcesionario {
 
                 concesionario = new Concesionario(id, nombre, localidad);
 
-                if (concesionario.getId()==idBuscado) {
+                if (concesionario.getId() == idBuscado) {
                     return concesionario;
                 }
-            }           
+            }
         } catch (EOFException eo) {
             System.out.println("Final de fichero alcanzado.");
-            dIS.close();
         } catch (IOException e) {
             e.printStackTrace();
+
+        } finally {
+            dIS.close();
         }
         return null;
     }
+
+    /**
+     * @author Ricardo Gómez Bastante
+     * @param id
+     */
     public void BorrarConcesionario(int id) {
 
         ArrayList<Concesionario> concesionario = new ArrayList<>();
@@ -119,7 +127,7 @@ public class MetodosConcesionario {
         catch (Exception e) {
             e.printStackTrace();
         }
-                concesionario.remove(id - 1);
+        concesionario.remove(id - 1);
         try {
             FileOutputStream Fos = new FileOutputStream("concesionarios.dat");
             ObjectOutputStream Oos = new ObjectOutputStream(Fos);
