@@ -73,7 +73,7 @@ public class MetodosConcesionario {
     /**
      *
      * @author Ricardo Gómez Ramos
-     * @param concesionarioBuscado
+     * @param idBuscado
      * @return
      * @throws java.io.IOException
      */
@@ -110,7 +110,7 @@ public class MetodosConcesionario {
      * @author Ricardo Gómez Bastante
      * @param id
      */
-    public void BorrarConcesionario(int id) {
+    public void BajaConcesionario(int id) {
 
         ArrayList<Concesionario> concesionario = new ArrayList<>();
 
@@ -127,14 +127,16 @@ public class MetodosConcesionario {
         catch (Exception e) {
             e.printStackTrace();
         }
-        concesionario.remove(id - 1);
+        for (Concesionario conce:concesionario) {
+            if (id==conce.getId()) {
+                conce.setActivo(false);
+            }
+        }
+       
         try {
             FileOutputStream Fos = new FileOutputStream("concesionarios.dat");
             ObjectOutputStream Oos = new ObjectOutputStream(Fos);
-            int i = 1;
             for (Concesionario conce : concesionario) {
-                conce.setId(i);
-                i++;
                 Oos.writeObject(conce);
             }
 
