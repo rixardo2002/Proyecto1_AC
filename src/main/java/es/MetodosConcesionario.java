@@ -65,7 +65,10 @@ public class MetodosConcesionario {
         return concesionario;
 
     }
-
+    /**
+     *
+     * @author Ricardo Gómez Ramos
+     */
     public void LeerConcesionario(Concesionario concesionarioBuscado) throws IOException {
         File f = new File("concesionarios.dat");
         Concesionario concesionario;
