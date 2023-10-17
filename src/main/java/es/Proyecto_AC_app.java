@@ -36,32 +36,32 @@ public class Proyecto_AC_app {
             switch (opc) {
                 case 1:
                     U.MenuClientesInicio();
-                    leer=br.readLine();
-                    opc=Integer.parseInt(leer);
+                    leer = br.readLine();
+                    opc = Integer.parseInt(leer);
                     //este switch es para que cuando seleccionas la opcion de clientes entras dentro del menú de clientes.
                     switch (opc) {
                         case 1:
-                            
+
                             break;
                         case 2:
                             break;
                         case 3:
-                            
+
                             break;
                         case 4:
-                            
+
                             break;
-                            
+
                         case 5:
-                            
+
                             break;
-                                    
+
                         default:
                             throw new AssertionError();
                     }
                     break;
                 case 2:
-                    
+
                     break;
                 case 3:
 
@@ -73,15 +73,14 @@ public class Proyecto_AC_app {
         } while (!salir);
 
         try {
-
             Proyecto_AC_app.myProperties.load(new FileInputStream("properties.properties"));
         } catch (IOException e) {
             System.out.println("No se pueden cargar la inicialización del programa. Saliendo...");
-            System.exit(100);
-        }
-        String archivo_clientes = Proyecto_AC_app.myProperties.getProperty("archivo_clientes");
 
-        File Clientes = new File(myProperties.getProperty(archivo_clientes));
+        }
+
+        String archivo_clientes = Proyecto_AC_app.myProperties.getProperty("archivo_clientes");
+        File Clientes = new File(archivo_clientes);
         //File Clientes = new File(rutaCarpetaCliente);
 
         //Verifica si la carpeta ya existe
