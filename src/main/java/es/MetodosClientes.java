@@ -175,7 +175,13 @@ public class MetodosClientes {
                 }
 
                 File clienteEliminado = new File(".\\clientesEliminados\\" + nif + ".txt");
-                archivoEliminado.renameTo(clienteEliminado);
+                
+                if (!clienteEliminado.exists()) {
+                    archivoEliminado.renameTo(clienteEliminado);
+                }else{
+                    
+                }
+                
             }else{
                 System.out.println("El archivo cliente no existe");
             }
@@ -183,5 +189,6 @@ public class MetodosClientes {
             System.out.println("Error al eliminar el cliente: " + e.getMessage());            
         }
         }
+   
 
     }
