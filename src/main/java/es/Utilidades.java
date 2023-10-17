@@ -130,7 +130,7 @@ public class Utilidades {
      */
     //Falta cambiar si en vez de la edad vamos a pedir la fecha de nacimiento
 
-     public static LocalDate obtenerFechaNacimientoValida(BufferedReader br) throws IOException {
+     public  LocalDate obtenerFechaNacimientoValida(BufferedReader br) throws IOException {
         while (true) {
             System.out.println("Introduce la fecha de nacimiento en el formato 'YYYY-MM-DD': ");
             String fechaNacimientoStr = br.readLine();
