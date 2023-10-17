@@ -6,6 +6,8 @@ import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 /**
  *
@@ -121,22 +123,25 @@ public class Utilidades {
 
     /**
      *
-     * @author jaime
+     * @author jaime y ricardo g
+     * @param br
+     * @return 
+     * @throws java.io.IOException
      */
     //Falta cambiar si en vez de la edad vamos a pedir la fecha de nacimiento
-    public int PedirEdad() throws IOException {
-        int edad;
-        String edadS;
-        do {
 
-            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-            System.out.print("Edad --> ");
-            edadS = br.readLine();
+     public static LocalDate obtenerFechaNacimientoValida(BufferedReader br) throws IOException {
+        while (true) {
+            System.out.println("Introduce la fecha de nacimiento en el formato 'YYYY-MM-DD': ");
+            String fechaNacimientoStr = br.readLine();
 
-        } while (edadS.isEmpty());
-        edad = Integer.parseInt(edadS);
-        return edad;
-
+            try {
+                LocalDate fechaNacimiento = LocalDate.parse(fechaNacimientoStr);
+                return fechaNacimiento;
+            } catch (DateTimeParseException e) {
+                System.out.println("Formato de fecha incorrecto. Debe ser 'YYYY-MM-DD'. Intenta de nuevo.");
+            }
+        }
     }
 
     /**

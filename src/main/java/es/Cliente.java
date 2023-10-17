@@ -1,5 +1,7 @@
 package es;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author Ricardo
@@ -15,7 +17,8 @@ public class Cliente {
     private String nombre;
     private String numeroTlf;
     private String ciudad;
-    private int edad;
+    private LocalDate fechaNacimiento;// Es una fecha de nacimiento usando java.time.LocalDate, para meterlo directo a un objeto se haria
+                                      // tal que asi Object obj = new Object(.....,LocalDate.of(1990,5,15)) -->Esto pondria que la fecha fue el 15 de mayo de 1990 
     private String nif;
 
     //Getter de la clase cliente
@@ -31,8 +34,8 @@ public class Cliente {
         return ciudad;
     }
 
-    public int getEdad() {
-        return edad;
+    public LocalDate getFechaNacimiento() {
+        return fechaNacimiento;
     }
 
     public String getNif() {
@@ -57,8 +60,8 @@ public class Cliente {
         this.ciudad = ciudad;
     }
 
-    public void setEdad(int edad) {
-        this.edad = edad;
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
     }
     
     //Constructores, tanto vacío como completo.
@@ -66,17 +69,17 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(String nombre, String numeroTlf, String ciudad, int edad,String nif) {
+    public Cliente(String nombre, String numeroTlf, String ciudad, LocalDate fechaNacimiento,String nif) {
         this.nombre = nombre;
         this.numeroTlf = numeroTlf;
         this.ciudad = ciudad;
-        this.edad = edad;
+        this.fechaNacimiento = fechaNacimiento;
         this.nif = nif;
     }
 
     @Override
     public String toString() {
-        return "Cliente{" + "nombre=" + nombre + ", numeroTlf=" + numeroTlf + ", ciudad=" + ciudad + ", edad=" + edad + ", nif=" + nif + '}';
+        return "Cliente{" + "nombre=" + nombre + ", numeroTlf=" + numeroTlf + ", ciudad=" + ciudad + ", fechaNacimiento=" + fechaNacimiento + ", nif=" + nif + '}';
     }
 
     
