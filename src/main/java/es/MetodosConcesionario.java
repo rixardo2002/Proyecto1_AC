@@ -12,6 +12,7 @@ import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -22,12 +23,37 @@ public class MetodosConcesionario {
     Utilidades U;
 
     /**
-     *
-     * @author jaime
+     * @author Jaime
+     * @return
+     * @throws FileNotFoundException
+     * @throws IOException
+     * @throws ClassNotFoundException
      */
-    public Concesionario CrearConcesionario() throws IOException {
+    public int seleccionarIDCOncesionario() throws FileNotFoundException, IOException, ClassNotFoundException {
+        FileInputStream fileInputStream = new FileInputStream("concesionarios.dat");
+        try (ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
+            Concesionario c = null;
+            try {
+                while (true) {
+                    c = (Concesionario) objectInputStream.readObject();
+                }
+            } catch (EOFException eof) {
+
+            }
+            return (c != null) ? c.getId() : -1;
+        }
+    }
+        /**
+         * @author Jaime
+         * @return
+         * @throws IOException
+         * @throws FileNotFoundException
+         * @throws ClassNotFoundException
+         */
+    public Concesionario CrearConcesionario() throws IOException, FileNotFoundException, ClassNotFoundException {
 
         Concesionario concesionario = new Concesionario();
+        concesionario.setId(seleccionarIDCOncesionario());
         concesionario.setNombreConcesionario(U.PedirNombreConcesionario());
         concesionario.setLocalidadConcesionario(U.PedirLocalidadConcesionario());
         return concesionario;
@@ -35,8 +61,10 @@ public class MetodosConcesionario {
     }
 
     /**
-     *
-     * @author jaime
+     * @author Jaime
+     * @param concesionario
+     * @return
+     * @throws IOException
      */
     public Concesionario ModificarConcesionario(Concesionario concesionario) throws IOException {
         boolean salir = false;
@@ -127,12 +155,12 @@ public class MetodosConcesionario {
         catch (Exception e) {
             e.printStackTrace();
         }
-        for (Concesionario conce:concesionario) {
-            if (id==conce.getId()) {
+        for (Concesionario conce : concesionario) {
+            if (id == conce.getId()) {
                 conce.setActivo(false);
             }
         }
-       
+
         try {
             FileOutputStream Fos = new FileOutputStream("concesionarios.dat");
             ObjectOutputStream Oos = new ObjectOutputStream(Fos);
