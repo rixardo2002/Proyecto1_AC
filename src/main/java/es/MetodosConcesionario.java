@@ -6,8 +6,12 @@ import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 
 /**
  *
@@ -98,5 +102,38 @@ public class MetodosConcesionario {
         }
         return null;
     }
+    public void BorrarConcesionario(int id) {
 
+        ArrayList<Concesionario> concesionario = new ArrayList<>();
+
+        try {
+            FileInputStream Fis = new FileInputStream("concesionarios.dat");
+            ObjectInputStream Ois = new ObjectInputStream(Fis);
+
+            // Lee todos los objetos del archivo y guárdalos en la lista
+            while (true) {
+                Concesionario conce = (Concesionario) Ois.readObject();
+                concesionario.add(conce);
+            }
+        } // Se ha llegado al final del archivo
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+                concesionario.remove(id - 1);
+        try {
+            FileOutputStream Fos = new FileOutputStream("concesionarios.dat");
+            ObjectOutputStream Oos = new ObjectOutputStream(Fos);
+            int i = 1;
+            for (Concesionario conce : concesionario) {
+                conce.setId(i);
+                i++;
+                Oos.writeObject(conce);
+            }
+
+            Oos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 }
