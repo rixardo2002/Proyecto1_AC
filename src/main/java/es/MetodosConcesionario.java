@@ -1,6 +1,11 @@
 package es;
 
 import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
@@ -60,4 +65,32 @@ public class MetodosConcesionario {
         return concesionario;
 
     }
+
+    public void LeerConcesionario(Concesionario concesionarioBuscado) throws IOException {
+        File f = new File("concesionarios.dat");
+        Concesionario concesionario;
+        int id;
+        String nombre, localidad;
+        boolean activo;
+        DataInputStream dIS = new DataInputStream(new FileInputStream( f));
+        try {
+            while (true) {
+                id = dIS.readInt();
+                nombre = dIS.readUTF();
+                localidad = dIS.readUTF();
+
+                concesionario = new Concesionario(id, nombre, localidad);
+
+                if (concesionario.equals(concesionarioBuscado)) {
+                    System.out.println(concesionario.toString());
+                }
+            }           
+        } catch (EOFException eo) {
+            System.out.println("Final de fichero alcanzado.");
+            dIS.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
