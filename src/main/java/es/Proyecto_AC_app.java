@@ -22,6 +22,7 @@ public class Proyecto_AC_app {
     public static void main(String[] args) throws IOException, AWTException, InterruptedException {
         //Logger logger = LogManager.getRootLogger();
         Utilidades U = new Utilidades();
+        
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String leer;
         int opc;
@@ -41,9 +42,15 @@ public class Proyecto_AC_app {
                     //este switch es para que cuando seleccionas la opcion de clientes entras dentro del menú de clientes.
                     switch (opc) {
                         case 1:
+                            Cliente cliente = crearCliente();
+                            clienteAFile(cliente);
+
 
                             break;
                         case 2:
+                            U.PedirNIF();
+                            String nif=br.readLine();
+                            MetodosClientes.eliminarCliente(nif);
                             break;
                         case 3:
 
@@ -88,10 +95,8 @@ public class Proyecto_AC_app {
             //Intenta crear la carpeta
             Clientes.mkdirs();
         }
-        Cliente cliente = crearCliente();
-
-        clienteAFile(cliente);
-
+        
+        
         clienteDesdeFile();
     }
 }
