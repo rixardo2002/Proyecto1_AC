@@ -22,57 +22,69 @@ public class Proyecto_AC_app {
     public static void main(String[] args) throws IOException, AWTException, InterruptedException {
         //Logger logger = LogManager.getRootLogger();
         Utilidades U = new Utilidades();
-        
+
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String leer;
         int opc;
         //logger.trace("Entrada a la clase principal");
         //logger.error("Prueba de un error");
         //String rutaCarpetaCliente = ".\\clientes";
-        boolean salir = false;
+        boolean salir = false, salirClientes = false;
         do {
             U.MenúDeInicio();
             leer = br.readLine();
             opc = Integer.parseInt(leer);
             switch (opc) {
                 case 1:
-                    U.MenuClientesInicio();
-                    leer = br.readLine();
-                    opc = Integer.parseInt(leer);
+
                     //este switch es para que cuando seleccionas la opcion de clientes entras dentro del menú de clientes.
-                    switch (opc) {
-                        case 1:
-                            Cliente cliente = crearCliente();
-                            clienteAFile(cliente);
+                    do {
+                        U.MenuClientesInicio();
+                        leer = br.readLine();
+                        opc = Integer.parseInt(leer);
+                        switch (opc) {
 
+                            //crear cliente
+                            case 1:
+                                U.MenuClienteCrear();
+                                Cliente cliente = crearCliente();
+                                clienteAFile(cliente);
 
-                            break;
-                        case 2:
-                            String nif;
-                          nif=  U.PedirNIF();
-                            
-                            MetodosClientes.eliminarCliente(nif);
-                            break;
-                        case 3:
+                                break;
 
-                            break;
-                        case 4:
+                            //borrar cliente
+                            case 2:
+                                String nif;
+                                nif = U.PedirNIF();
 
-                            break;
+                                MetodosClientes.eliminarCliente(nif);
+                                break;
 
-                        case 5:
+                            //Modificar cliente
+                            case 3:
 
-                            break;
+                                break;
 
-                        default:
-                            throw new AssertionError();
-                    }
+                            //mostrar datos del cliente
+                            case 4:
+                                clienteDesdeFile();
+                                break;
+
+                            //salir del menú de clientes
+                            case 5:
+                                salir = true;
+                                break;
+
+                            default:
+                                throw new AssertionError();
+                        }
+                    } while (!salirClientes);
                     break;
                 case 2:
 
                     break;
                 case 3:
-
+                    salir = true;
                     break;
                 default:
                     throw new AssertionError();
@@ -96,8 +108,6 @@ public class Proyecto_AC_app {
             //Intenta crear la carpeta
             Clientes.mkdirs();
         }
-        
-        
-        clienteDesdeFile();
+
     }
 }

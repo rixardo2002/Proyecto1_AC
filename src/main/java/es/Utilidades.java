@@ -18,13 +18,14 @@ public class Utilidades {
      * @author jaime
      */
     public void MenuClientesInicio() throws InterruptedException, AWTException {
-
+        Thread.sleep(1000);
+        cls();
         System.out.println("******************************************************************");
         System.out.println("******************************************************************");
         System.out.println("**                         MENÚ CLIENTE                         **");
         System.out.println("******************************************************************");
         System.out.println("******************************************************************");
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         cls();
 
         System.out.println("**********************************");
@@ -214,7 +215,7 @@ public class Utilidades {
         System.out.println("******* 3.Salir                           ******");
         System.out.println("************************************************");
         System.out.println("************************************************");
-        System.out.println("---->>");
+        System.out.print("---->>");
         
         
     }
