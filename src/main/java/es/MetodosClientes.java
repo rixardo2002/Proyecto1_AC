@@ -12,6 +12,7 @@ import static es.Utilidades.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 
 public class MetodosClientes {
 
@@ -20,15 +21,14 @@ public class MetodosClientes {
      * @author Ricardo Gómez Bastante Ricardo Gómez Ramos
      */
     public static Cliente crearCliente() throws IOException {
+         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         Utilidades u = new Utilidades();
         String nombre = u.PedirNombre();
         String telef = u.PedirTLF();
         String ciudad = u.PedirCiudad();
-        int edad = u.PedirEdad();
+        LocalDate fech_nac = u.obtenerFechaNacimientoValida(br);
         String nif = u.PedirNIF();
-
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        Cliente c = new Cliente(nombre, telef, ciudad, edad, nif);
+        Cliente c = new Cliente(nombre, telef, ciudad, fech_nac, nif);
         return c;
     }
 
@@ -77,7 +77,7 @@ public class MetodosClientes {
         Utilidades u = new Utilidades();
 
         try {
-            System.out.println("Dime el NIF de Cliente que estas buscando");
+            System.out.println("Dime el NIF del Cliente que quieres mostrar por pantalla");
             dni = u.PedirNIF();
             File f = new File(".\\clientes\\" + dni + ".txt");//declara fichero
             BufferedReader fbr = new BufferedReader(new FileReader(f, StandardCharsets.UTF_8));
@@ -94,6 +94,56 @@ public class MetodosClientes {
         } catch (IOException io) {
             System.out.println("Error de E/S ");
         }
+    }
+    /**
+     *
+     * @author Ricardo Gómez Ramos
+     */
+    public static Cliente buscarCliente(String nif) {//Lee lo que hay dentro de un fichero,nos muestra su contenido
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String dni;
+        Utilidades u = new Utilidades();
+        Cliente cliente = null;
+        
+        try {
+            System.out.println("Dime el NIF de Cliente que estas buscando");
+            dni = u.PedirNIF();
+            File f = new File(".\\clientes\\" + dni + ".txt");//declara fichero
+            BufferedReader fbr = new BufferedReader(new FileReader(f, StandardCharsets.UTF_8));
+
+            String linea;
+            StringBuilder clienteDatos = new StringBuilder();
+            while ((linea = fbr.readLine()) != null) {
+            clienteDatos.append(linea).append("\n");
+            }
+
+            fbr.close();
+            
+            if (clienteDatos.length() > 0) {
+            String clienteString = clienteDatos.toString();
+            // Dividir los datos del cliente por líneas o separador que utilices
+            String[] datosCliente = clienteString.split(",");
+
+            if (datosCliente.length >= 4) {
+                String nombre = datosCliente[0];
+                String numeroTlf = datosCliente[1];
+                String ciudad = datosCliente[2];
+                LocalDate edad = LocalDate.parse(datosCliente[3]);
+                
+                String nifCliente = datosCliente[4];
+
+                // Crear un objeto Cliente con los datos leídos
+                cliente = new Cliente(nombre, numeroTlf, ciudad, edad, nifCliente);
+                return cliente;
+            }
+        }
+            
+        } catch (FileNotFoundException fn) {
+            System.out.println("No se encuentra el fichero en la ruta indicada");
+        } catch (IOException io) {
+            System.out.println("Error de E/S ");
+        }
+        return cliente;
     }
 
     /**
@@ -137,9 +187,9 @@ public class MetodosClientes {
                 nuevaCiudad = u.PedirCiudad();
                 cliente.setCiudad(nuevaCiudad);
 
-                int nuevaEdad;
-                nuevaEdad = u.PedirEdad();
-                cliente.setEdad(nuevaEdad);
+                LocalDate nuevaEdad;
+                nuevaEdad = u.obtenerFechaNacimientoValida(br);
+                cliente.setFechaNacimiento(nuevaEdad);
 
                 FileWriter fw = new FileWriter(f);
                 fw.write(cliente.toString());
