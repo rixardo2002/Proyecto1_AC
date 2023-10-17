@@ -71,7 +71,6 @@ public class MetodosClientes {
      *
      * @author Ricardo Gómez Ramos
      */
-
     public static void clienteDesdeFile() {//Lee lo que hay dentro de un fichero,nos muestra su contenido
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String dni;
@@ -159,25 +158,30 @@ public class MetodosClientes {
     /**
      *
      * @author Ricardo Gómez Ramos
+     * @param nif
      */
     public static void eliminarCliente(String nif) {
         try {
-            String archivo = ".\\clientes\\" + nif + ".txt"; // Reemplaza con el nombre de tu archivo
-            File archivoEliminado = new File(archivo);
+            String carpetaClientes = ".\\clientes\\" + nif + ".txt"; // Reemplaza con el nombre de tu archivo
+            File archivoEliminado = new File(carpetaClientes);
 
-            File carpetaEliminados = new File(".\\clientesEliminados");
-
-            if (!carpetaEliminados.exists()) {
-                carpetaEliminados.mkdirs();
-            }
             if (archivoEliminado.exists()) {
-                archivoEliminado.delete();
-                File clienteEliminado = new File(".\\clientesEliminados\\" + nif + ".txt");
-            }
+                String carpetaClientesEliminados = ".\\clientesEliminados";
+                File carpetaClientesEliminadosFile = new File(carpetaClientesEliminados);
 
-        } catch (Exception e) {
+                if (!carpetaClientesEliminadosFile.exists()) {
+                    carpetaClientesEliminadosFile.mkdirs();
+                    System.out.println("Carpeta 'clientesEliminados' creada con éxito.");
+                }
+
+                File clienteEliminado = new File(".\\clientesEliminados\\" + nif + ".txt");
+                archivoEliminado.renameTo(clienteEliminado);
+            }else{
+                System.out.println("El archivo cliente no existe");
+            }
+            }catch (Exception e) {
             System.out.println("Error al eliminar el cliente: " + e.getMessage());            
         }
-    }
+        }
 
-}
+    }
