@@ -68,13 +68,15 @@ public class MetodosConcesionario {
     /**
      *
      * @author Ricardo Gómez Ramos
+     * @param concesionarioBuscado
+     * @return 
+     * @throws java.io.IOException
      */
-    public void LeerConcesionario(Concesionario concesionarioBuscado) throws IOException {
+    public Concesionario BuscarConcesionario(int idBuscado) throws IOException {
         File f = new File("concesionarios.dat");
         Concesionario concesionario;
         int id;
         String nombre, localidad;
-        boolean activo;
         DataInputStream dIS = new DataInputStream(new FileInputStream( f));
         try {
             while (true) {
@@ -84,8 +86,8 @@ public class MetodosConcesionario {
 
                 concesionario = new Concesionario(id, nombre, localidad);
 
-                if (concesionario.equals(concesionarioBuscado)) {
-                    System.out.println(concesionario.toString());
+                if (concesionario.getId()==idBuscado) {
+                    return concesionario;
                 }
             }           
         } catch (EOFException eo) {
@@ -94,6 +96,7 @@ public class MetodosConcesionario {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return null;
     }
 
 }
