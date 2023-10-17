@@ -73,7 +73,7 @@ public class MetodosConcesionario {
     /**
      *
      * @author Ricardo Gómez Ramos
-     * @param concesionarioBuscado
+     * @param idBuscado
      * @return
      * @throws java.io.IOException
      */
