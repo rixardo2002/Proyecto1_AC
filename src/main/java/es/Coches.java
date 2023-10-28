@@ -22,6 +22,16 @@ public class Coches {
     
     public Coches() {
     }
+    
+    public Coches(char[] marca,char[] modelo) {
+        this.marca = marca;
+        this.modelo = modelo;
+    }
+
+    public Coches(String marca,String modelo) {
+        this.setMarca(marca);
+        this.setModelo(modelo);
+    }
 
     public Coches(int id,char[] marca,char[] modelo) {
         this.id = id;
@@ -124,6 +134,7 @@ public class Coches {
         Coches c = new Coches();
         c.setId(id);
         c.setMarca(marca);
+        c.setModelo(modelo);
         return c;
     }
     
