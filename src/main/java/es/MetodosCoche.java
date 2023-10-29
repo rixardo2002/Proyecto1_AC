@@ -36,6 +36,6 @@ public class MetodosCoche {
         file.close();  //cerrar fichero 
 
         Coches coche = Coches.createCoche(arrLeidos);
-        System.out.println("Coche: " + coche);
+        System.out.println(coche.toString());
     }
 }
