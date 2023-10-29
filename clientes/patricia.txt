@@ -1,1 +1,0 @@
-Cliente{nombre=patricia, numeroTlf=672456732, ciudad=Ciudad Real, edad=20}

@@ -7,20 +7,20 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import static es.Utilidades.*;
 
 /**
  *
  * @author Julián
  */
 public class MetodosConcesionario {
-
-    Utilidades U;
 
     /**
      * @author Jaime
@@ -29,33 +29,119 @@ public class MetodosConcesionario {
      * @throws IOException
      * @throws ClassNotFoundException
      */
-    public int seleccionarIDCOncesionario() throws FileNotFoundException, IOException, ClassNotFoundException {
-        FileInputStream fileInputStream = new FileInputStream("concesionarios.dat");
-        try (ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
-            Concesionario c = null;
-            try {
-                while (true) {
-                    c = (Concesionario) objectInputStream.readObject();
-                }
-            } catch (EOFException eof) {
+//    public static int seleccionarIDCOncesionario() throws FileNotFoundException, IOException, ClassNotFoundException {
+//        File carpeta = new File(".\\concesionarios");
+//        File archivo = new File(".\\concesionarios\\concesionarios.dat");
+//
+//        if (!carpeta.exists()) {
+//            carpeta.mkdirs();  // Crea la carpeta si no existe
+//        }
+//
+//        if (!archivo.exists()) {
+//            try {
+//                archivo.createNewFile();  // Crea el archivo si no existe
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        FileInputStream fileInputStream = new FileInputStream(".\\concesionarios\\concesionarios.dat");
+//        try (ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
+//            Concesionario c = null;
+//            try {
+//                while (true) {
+//                    c = (Concesionario) objectInputStream.readObject();
+//                }
+//            } catch (EOFException eof) {
+//
+//            }
+//            return (c != null) ? c.getId() : -1;
+//        }
+//    }
+    /**
+     * @author Ricardo Gómez Bastante & Ricardo Gómez Ramos
+     */
+    public static void crearCarpetaYArchivoConcesionarios() {
+        File carpeta = new File(".\\concesionarios");
+        File archivo = new File(".\\concesionarios\\concesionarios.dat");
 
+        if (!carpeta.exists()) {
+            carpeta.mkdirs();  // Crea la carpeta si no existe
+        }
+
+        if (!archivo.exists()) {
+            try {
+                archivo.createNewFile();  // Crea el archivo si no existe
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            return (c != null) ? c.getId() : -1;
         }
     }
-        /**
-         * @author Jaime
-         * @return
-         * @throws IOException
-         * @throws FileNotFoundException
-         * @throws ClassNotFoundException
-         */
-    public Concesionario CrearConcesionario() throws IOException, FileNotFoundException, ClassNotFoundException {
+
+    /**
+     * @author Jaime
+     * @return
+     * @throws FileNotFoundException
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
+    public static int seleccionarIDCOncesionario() throws IOException {
+        File archivoConcesionarios = new File(".\\concesionarios\\concesionarios.dat");
+
+        int lastId = 0;
+
+        if (!archivoConcesionarios.exists()) {
+            return 1; // Puedes elegir el valor inicial del ID si el archivo no existe
+        }
+
+        try (DataInputStream dIS = new DataInputStream(new FileInputStream(archivoConcesionarios))) {
+            while (true) {
+                int id = dIS.readInt();
+                String nombre = dIS.readUTF();
+                String localidad = dIS.readUTF();
+
+                if (id > lastId) {
+                    lastId = id;
+                }
+            }
+        } catch (EOFException eof) {
+            // No se hace nada aquí ya que simplemente indica el final del archivo
+        }
+
+        return lastId + 1; // Incrementa el ID
+    }
+
+    /**
+     * @author Ricardo Gómez Ramos & Ricardo Gómez Bastante
+     * @param concesionario
+     * @throws IOException
+     */
+    public static void concesionarioADat(Concesionario concesionario) throws IOException {
+        File archivoConcesionarios = new File(".\\concesionarios\\concesionarios.dat");
+
+        // Utiliza FileOutputStream con modo de adición (true) para abrir el archivo
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(archivoConcesionarios, true))) {
+            // Escribe el objeto Concesionario en el archivo
+            oos.writeObject(concesionario);
+
+            System.out.println("Concesionario creado y guardado en el archivo concesionarios.dat.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * @author Jaime
+     * @return
+     * @throws IOException
+     * @throws FileNotFoundException
+     * @throws ClassNotFoundException
+     */
+    public static Concesionario CrearConcesionario() throws IOException, FileNotFoundException, ClassNotFoundException {
 
         Concesionario concesionario = new Concesionario();
         concesionario.setId(seleccionarIDCOncesionario());
-        concesionario.setNombreConcesionario(U.PedirNombreConcesionario());
-        concesionario.setLocalidadConcesionario(U.PedirLocalidadConcesionario());
+        concesionario.setNombreConcesionario(Utilidades.PedirNombreConcesionario());
+        concesionario.setLocalidadConcesionario(Utilidades.PedirLocalidadConcesionario());
         return concesionario;
 
     }
@@ -80,10 +166,10 @@ public class MetodosConcesionario {
             opc = Integer.parseInt(leer);
             switch (opc) {
                 case 1:
-                    concesionario.setNombreConcesionario(U.PedirNombreConcesionario());
+                    concesionario.setNombreConcesionario(Utilidades.PedirNombreConcesionario());
                     break;
                 case 2:
-                    concesionario.setLocalidadConcesionario(U.PedirLocalidadConcesionario());
+                    concesionario.setLocalidadConcesionario(Utilidades.PedirLocalidadConcesionario());
                     break;
                 case 3:
                     salir = true;
@@ -105,8 +191,8 @@ public class MetodosConcesionario {
      * @return
      * @throws java.io.IOException
      */
-    public Concesionario BuscarConcesionario(int idBuscado) throws IOException {
-        File f = new File("concesionarios.dat");
+    public static Concesionario BuscarConcesionario(int idBuscado) throws IOException {
+        File f = new File(".\\concesionarios\\concesionarios.dat");
         Concesionario concesionario;
         int id;
         String nombre, localidad;
@@ -143,7 +229,7 @@ public class MetodosConcesionario {
         ArrayList<Concesionario> concesionario = new ArrayList<>();
 
         try {
-            FileInputStream Fis = new FileInputStream("concesionarios.dat");
+            FileInputStream Fis = new FileInputStream(".\\concesionarios\\concesionarios.dat");
             ObjectInputStream Ois = new ObjectInputStream(Fis);
 
             // Lee todos los objetos del archivo y guárdalos en la lista
@@ -162,7 +248,7 @@ public class MetodosConcesionario {
         }
 
         try {
-            FileOutputStream Fos = new FileOutputStream("concesionarios.dat");
+            FileOutputStream Fos = new FileOutputStream(".\\concesionarios\\concesionarios.dat");
             ObjectOutputStream Oos = new ObjectOutputStream(Fos);
             for (Concesionario conce : concesionario) {
                 Oos.writeObject(conce);

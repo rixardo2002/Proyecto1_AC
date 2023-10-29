@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import static es.MetodosClientes.*;
+import static es.MetodosConcesionario.*;
 import static es.CreadorClienteXML.*;
 import static es.MetodosCoche.*;
 import java.awt.AWTException;
@@ -110,31 +111,12 @@ public class Proyecto_AC_app {
                         switch (opc) {
 
                             //crear concesionario
-                            case 1:                                
-                                try {
-                                // Verificar si la carpeta 'concesionarios' existe, y si no, crearla
-                                File carpetaConcesionarios = new File("concesionarios");
-                                if (!carpetaConcesionarios.exists()) {
-                                    carpetaConcesionarios.mkdir();  // Crea la carpeta
-                                }
+                            case 1:
+                                crearCarpetaYArchivoConcesionarios();
+                                Concesionario concesionario = CrearConcesionario();
+                                concesionarioADat(concesionario);
 
-                                // Luego, intenta trabajar con el archivo 'concesionarios.dat' en la carpeta
-                                File archivoConcesionarios = new File(carpetaConcesionarios, "concesionarios.dat");
-
-                                // Ahora, puedes continuar con tus operaciones en 'archivoConcesionarios'
-                                Concesionario concesionario = mc.CrearConcesionario();
-                                ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(archivoConcesionarios));
-                                oos.writeObject(concesionario);
-                                oos.flush();
-                                oos.close();
-
-                            } catch (FileNotFoundException ex) {
-                                System.out.println(ex.getLocalizedMessage());
-                            } catch (IOException ex) {
-                                System.out.println(ex.getLocalizedMessage());
-                            }
-
-                            break;
+                                break;
 
                             //borrar concesionario
                             case 2:
@@ -161,7 +143,7 @@ public class Proyecto_AC_app {
                                 mc.ModificarConcesionario(concesionario2);
 
                                 try {
-                                    File f = new File("concesionarios.dat");
+                                    File f = new File(".\\concesionarios\\concesionarios.dat");
 
                                     ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f));
                                     oos.writeObject(concesionario2);
@@ -177,7 +159,7 @@ public class Proyecto_AC_app {
                                 break;
 
                             //salir concesionario
-                            case 4:
+                                 case 4:
                                 salirConcesionario = true;
                                 break;
                             default:

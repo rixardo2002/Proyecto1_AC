@@ -41,13 +41,23 @@ public class MetodosClientes {
      * @throws java.io.IOException
      */
     public static void clienteAFile(Cliente cliente) throws IOException {
-        Utilidades u = new Utilidades();
+        File carpeta = new File(".\\clientes");
         File f = new File(".\\clientes\\" + cliente.getNif() + ".txt");//declara fichero
+
+    if (!carpeta.exists()) {
+        carpeta.mkdirs();  // Crea la carpeta si no existe
+    }
+
+        Utilidades u = new Utilidades();
 
         boolean salir = false;
 
         if (!f.exists()) {
-            f.createNewFile();
+            try {
+            f.createNewFile();  // Crea el archivo si no existe
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         } else {
             do {
                 System.out.print("Dime un NIF, el tuyo ya esta usado: ");

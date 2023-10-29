@@ -171,7 +171,7 @@ public class Utilidades {
      *
      * @author jaime
      */
-    public String PedirNombreConcesionario() throws IOException {
+    public static String PedirNombreConcesionario() throws IOException {
 
         //char nombre[16];
         String name;
@@ -187,7 +187,7 @@ public class Utilidades {
      *
      * @author jaime
      */
-    public String PedirLocalidadConcesionario() throws IOException {
+    public static String PedirLocalidadConcesionario() throws IOException {
         String name;
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Localidad-->");
@@ -200,7 +200,7 @@ public class Utilidades {
      *
      * @author jaime
      */
-    public void MenúDeInicio() throws AWTException, InterruptedException {
+    public  void MenúDeInicio() throws AWTException, InterruptedException {
         System.out.println("************************************************************************");
         System.out.println("************************************************************************");
         System.out.println("**                      BIENVENIDO A NUESTRA APP                      **");
