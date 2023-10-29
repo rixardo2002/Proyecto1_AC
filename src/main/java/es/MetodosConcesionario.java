@@ -22,41 +22,7 @@ import static es.Utilidades.*;
  */
 public class MetodosConcesionario {
 
-    /**
-     * @author Jaime
-     * @return
-     * @throws FileNotFoundException
-     * @throws IOException
-     * @throws ClassNotFoundException
-     */
-//    public static int seleccionarIDCOncesionario() throws FileNotFoundException, IOException, ClassNotFoundException {
-//        File carpeta = new File(".\\concesionarios");
-//        File archivo = new File(".\\concesionarios\\concesionarios.dat");
-//
-//        if (!carpeta.exists()) {
-//            carpeta.mkdirs();  // Crea la carpeta si no existe
-//        }
-//
-//        if (!archivo.exists()) {
-//            try {
-//                archivo.createNewFile();  // Crea el archivo si no existe
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        FileInputStream fileInputStream = new FileInputStream(".\\concesionarios\\concesionarios.dat");
-//        try (ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
-//            Concesionario c = null;
-//            try {
-//                while (true) {
-//                    c = (Concesionario) objectInputStream.readObject();
-//                }
-//            } catch (EOFException eof) {
-//
-//            }
-//            return (c != null) ? c.getId() : -1;
-//        }
-//    }
+
     /**
      * @author Ricardo Gómez Bastante & Ricardo Gómez Ramos
      */
@@ -78,7 +44,7 @@ public class MetodosConcesionario {
     }
 
     /**
-     * @author Jaime
+     * @author Jaime & Ricardo Gómez Bastante
      * @return
      * @throws FileNotFoundException
      * @throws IOException
@@ -137,7 +103,7 @@ public class MetodosConcesionario {
      * @throws ClassNotFoundException
      */
     public static Concesionario CrearConcesionario() throws IOException, FileNotFoundException, ClassNotFoundException {
-
+         
         Concesionario concesionario = new Concesionario();
         concesionario.setId(seleccionarIDCOncesionario());
         concesionario.setNombreConcesionario(Utilidades.PedirNombreConcesionario());
@@ -186,27 +152,26 @@ public class MetodosConcesionario {
 
     /**
      *
-     * @author Ricardo Gómez Ramos
+     * @author Ricardo Gómez Ramos & Jaime
      * @param idBuscado
      * @return
      * @throws java.io.IOException
      */
-    public static Concesionario BuscarConcesionario(int idBuscado) throws IOException {
+    public static Concesionario BuscarConcesionario(int idBuscado) throws IOException, ClassNotFoundException {
         File f = new File(".\\concesionarios\\concesionarios.dat");
         Concesionario concesionario;
         int id;
         String nombre, localidad;
-        DataInputStream dIS = new DataInputStream(new FileInputStream(f));
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
+
         try {
             while (true) {
-                id = dIS.readInt();
-                nombre = dIS.readUTF();
-                localidad = dIS.readUTF();
+               Concesionario c=(Concesionario) ois.readObject();
 
-                concesionario = new Concesionario(id, nombre, localidad);
+              //  concesionario = new Concesionario(id, nombre, localidad);
 
-                if (concesionario.getId() == idBuscado) {
-                    return concesionario;
+                if (c.getId() == idBuscado) {
+                    return c;
                 }
             }
         } catch (EOFException eo) {
@@ -215,7 +180,7 @@ public class MetodosConcesionario {
             e.printStackTrace();
 
         } finally {
-            dIS.close();
+            ois.close();
         }
         return null;
     }

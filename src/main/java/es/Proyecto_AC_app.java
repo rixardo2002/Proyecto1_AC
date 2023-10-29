@@ -122,7 +122,7 @@ public class Proyecto_AC_app {
                             case 2:
                                 int idconce;
                                 do {
-                                    System.out.println("ID del concesionario que desea eliminar-->");
+                                    System.out.println("ID del concesionario que desea modificar-->");
                                     idconce = Integer.parseInt(br.readLine());
                                 } while (mc.BuscarConcesionario(idconce) == null);
 

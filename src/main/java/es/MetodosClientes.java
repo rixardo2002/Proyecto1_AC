@@ -163,7 +163,7 @@ public class MetodosClientes {
 
     /**
      *
-     * @author Ricardo Gómez Ramos
+     * @author Ricardo Gómez Ramos 
      * @param cliente
      */
     public static void modificarCliente(Cliente cliente) {
@@ -223,7 +223,7 @@ public class MetodosClientes {
 
     /**
      *
-     * @author Ricardo Gómez Ramos
+     * @author Ricardo Gómez Ramos & Ricardo Gómez Bastante
      * @param nif
      */
     public static void eliminarCliente(String nif) {
