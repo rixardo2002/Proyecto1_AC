@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import static es.MetodosClientes.*;
+import static es.CreadorClienteXML.*;
 import java.awt.AWTException;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -49,7 +50,13 @@ public class Proyecto_AC_app {
                                 U.MenuClienteCrear();
                                 Cliente cliente = crearCliente();
                                 clienteAFile(cliente);
-
+                                
+                                // Generar y guardar el archivo XML del cliente
+                                generarXMLCliente(cliente);
+                                    
+                                // Leer y mostrar los datos del cliente desde el archivo XML
+                                leerXMLCliente(cliente);
+            
                                 break;
 
                             //borrar cliente

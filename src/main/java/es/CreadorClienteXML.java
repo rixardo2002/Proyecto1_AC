@@ -49,17 +49,25 @@ public class CreadorClienteXML {
             // Crear elementos para los atributos del cliente
             Element nombreElement = doc.createElement(NOMBRE);
             nombreElement.appendChild(doc.createTextNode(cliente.getNombre()));
+            clienteElement.appendChild(doc.createTextNode("")); // Línea vacía para formato
+
 
             Element numeroTlfElement = doc.createElement(NUMEROTLF);
             numeroTlfElement.appendChild(doc.createTextNode(cliente.getNumeroTlf()));
+            clienteElement.appendChild(doc.createTextNode("")); // Línea vacía para formato
 
+            
             Element ciudadElement = doc.createElement(CIUDAD);
             ciudadElement.appendChild(doc.createTextNode(cliente.getCiudad()));
+            clienteElement.appendChild(doc.createTextNode("")); // Línea vacía para formato
+
+            
 
             Element edadElement = doc.createElement(FECHA_NAC);
             LocalDate fechaNacimiento = cliente.getFechaNacimiento();
             String fechaN = fechaNacimiento.toString();
             edadElement.appendChild(doc.createTextNode(fechaN));
+            clienteElement.appendChild(doc.createTextNode("")); // Línea vacía para formato
 
             Element nifElement = doc.createElement(NIF);
             nifElement.appendChild(doc.createTextNode(cliente.getNif()));
