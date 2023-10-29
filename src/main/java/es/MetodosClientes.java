@@ -17,8 +17,10 @@ import java.time.LocalDate;
 public class MetodosClientes {
 
     /**
-     *
+     * 
      * @author Ricardo Gómez Bastante Ricardo Gómez Ramos
+     * @return 
+     * @throws java.io.IOException
      */
     public static Cliente crearCliente() throws IOException {
          BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -35,9 +37,10 @@ public class MetodosClientes {
     /**
      *
      * @author Ricardo Gómez Bastante
+     * @param cliente
+     * @throws java.io.IOException
      */
     public static void clienteAFile(Cliente cliente) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         Utilidades u = new Utilidades();
         File f = new File(".\\clientes\\" + cliente.getNif() + ".txt");//declara fichero
 
@@ -72,7 +75,7 @@ public class MetodosClientes {
      * @author Ricardo Gómez Ramos
      */
     public static void clienteDesdeFile() {//Lee lo que hay dentro de un fichero,nos muestra su contenido
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        
         String dni;
         Utilidades u = new Utilidades();
 
@@ -98,9 +101,11 @@ public class MetodosClientes {
     /**
      *
      * @author Ricardo Gómez Ramos
+     * @param nif
+     * @return 
      */
     public static Cliente buscarCliente(String nif) {//Lee lo que hay dentro de un fichero,nos muestra su contenido
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        
         String dni;
         Utilidades u = new Utilidades();
         Cliente cliente = null;
@@ -149,6 +154,7 @@ public class MetodosClientes {
     /**
      *
      * @author Ricardo Gómez Ramos
+     * @param cliente
      */
     public static void modificarCliente(Cliente cliente) {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

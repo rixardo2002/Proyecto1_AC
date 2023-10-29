@@ -8,4 +8,16 @@
 <Ciudad>barcelona</Ciudad>
 <Fecha_nac>2001-12-02</Fecha_nac>
 <NIF>05735268E</NIF></Cliente>
+<Cliente>
+<Nombre>alvaro</Nombre>
+<NumeroTlf>456445423</NumeroTlf>
+<Ciudad>real</Ciudad>
+<Fecha_nac>1234-12-05</Fecha_nac>
+<NIF>95859590I</NIF></Cliente>
+<Cliente>
+<Nombre>vanesa</Nombre>
+<NumeroTlf>345345345</NumeroTlf>
+<Ciudad>mades</Ciudad>
+<Fecha_nac>2342-12-12</Fecha_nac>
+<NIF>03434344R</NIF></Cliente>
 </Clientes>

@@ -36,7 +36,7 @@ public class Proyecto_AC_app {
         //logger.trace("Entrada a la clase principal");
         //logger.error("Prueba de un error");
         //String rutaCarpetaCliente = ".\\clientes";
-        String marca,modelo;
+        String marca, modelo;
         boolean salir = false, salirClientes = false, salirConcesionario = false, salirCoches = false;
         do {
             U.MenúDeInicio();
@@ -61,9 +61,6 @@ public class Proyecto_AC_app {
                                 // Generar y guardar el archivo XML del cliente
                                 agregarClienteAClientesXML(cliente);
 
-                                    
-                                leerClientesDesdeXML();
-
                                 break;
 
                             //borrar cliente
@@ -76,7 +73,10 @@ public class Proyecto_AC_app {
 
                             //Modificar cliente
                             case 3:
-
+                                String nif2;
+                                nif2 = U.PedirNIF();
+                                Cliente c = MetodosClientes.buscarCliente(nif2);
+                                MetodosClientes.modificarCliente(c);
                                 break;
 
                             //mostrar datos del cliente
@@ -84,9 +84,16 @@ public class Proyecto_AC_app {
                                 clienteDesdeFile();
                                 break;
 
-                            //salir del menú de clientes
                             case 5:
-                                salir = true;
+                                //Leemos el xml de todos los clientes creados
+                                System.out.println("Todos los clientes creados:");
+                                System.out.println("");
+                                leerClientesDesdeXML();
+                                break;
+
+                            //salir del menú de clientes
+                            case 6:
+                                salirClientes = true;
                                 break;
 
                             default:
@@ -103,24 +110,31 @@ public class Proyecto_AC_app {
                         switch (opc) {
 
                             //crear concesionario
-                            case 1:
-                                
-
+                            case 1:                                
                                 try {
-                                    File f = new File("concesionarios.dat");
-                                    Concesionario concesionario = mc.CrearConcesionario();
-                                    ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f));
-                                    oos.writeObject(concesionario);
-
-                                    oos.flush();
-                                    oos.close();
-                                } catch (FileNotFoundException ex) {
-                                    System.out.println(ex.getLocalizedMessage());
-                                } catch (IOException ex) {
-                                    System.out.println(ex.getLocalizedMessage());
+                                // Verificar si la carpeta 'concesionarios' existe, y si no, crearla
+                                File carpetaConcesionarios = new File("concesionarios");
+                                if (!carpetaConcesionarios.exists()) {
+                                    carpetaConcesionarios.mkdir();  // Crea la carpeta
                                 }
 
-                                break;
+                                // Luego, intenta trabajar con el archivo 'concesionarios.dat' en la carpeta
+                                File archivoConcesionarios = new File(carpetaConcesionarios, "concesionarios.dat");
+
+                                // Ahora, puedes continuar con tus operaciones en 'archivoConcesionarios'
+                                Concesionario concesionario = mc.CrearConcesionario();
+                                ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(archivoConcesionarios));
+                                oos.writeObject(concesionario);
+                                oos.flush();
+                                oos.close();
+
+                            } catch (FileNotFoundException ex) {
+                                System.out.println(ex.getLocalizedMessage());
+                            } catch (IOException ex) {
+                                System.out.println(ex.getLocalizedMessage());
+                            }
+
+                            break;
 
                             //borrar concesionario
                             case 2:
@@ -129,7 +143,7 @@ public class Proyecto_AC_app {
                                     System.out.println("ID del concesionario que desea eliminar-->");
                                     idconce = Integer.parseInt(br.readLine());
                                 } while (mc.BuscarConcesionario(idconce) == null);
-                                
+
                                 mc.BajaConcesionario(idconce);
                                 break;
 
@@ -139,13 +153,13 @@ public class Proyecto_AC_app {
                                     System.out.println("ID del concesionario que desea modificar-->");
                                     idconce = Integer.parseInt(br.readLine());
                                 } while (mc.BuscarConcesionario(idconce) == null);
-                                
+
                                 Concesionario concesionario2 = mc.BuscarConcesionario(idconce);
-                                
+
                                 mc.BajaConcesionario(idconce);
-                                
+
                                 mc.ModificarConcesionario(concesionario2);
-                                
+
                                 try {
                                     File f = new File("concesionarios.dat");
 
@@ -159,7 +173,7 @@ public class Proyecto_AC_app {
                                 } catch (IOException ex) {
                                     System.out.println(ex.getLocalizedMessage());
                                 }
-                                
+
                                 break;
 
                             //salir concesionario
@@ -183,9 +197,9 @@ public class Proyecto_AC_app {
                             case 1:
                                 marca = U.PedirMarcaCoche();
                                 modelo = U.PedirModeloCoche();
-                                
-                                Coches coche = new Coches(marca,modelo);
-                                
+
+                                Coches coche = new Coches(marca, modelo);
+
                                 crearCoche(coche);
                                 break;
 
@@ -194,10 +208,9 @@ public class Proyecto_AC_app {
                                 int idcoche;
                                 System.out.println("ID del coche que quieres ver los datos-->");
                                 idcoche = Integer.parseInt(br.readLine());
-                                
+
                                 leerCoche(idcoche);
                                 break;
-                             
 
                             //salir coches
                             case 3:
@@ -211,6 +224,7 @@ public class Proyecto_AC_app {
                     break;
                 case 4:
                     salir = true;
+                    conversorXMLToHTML("clientes.xml");
                     break;
                 default:
                     throw new AssertionError();

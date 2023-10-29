@@ -36,7 +36,8 @@ public class Utilidades {
         System.out.println("******* 2.Borrar Cliente    ******");
         System.out.println("******* 3.Modificar Cliente ******");
         System.out.println("******* 4.Mostrar Cliente   ******");
-        System.out.println("******* 5.Salir             ******");
+        System.out.println("******* 5.Mostrar Clientes  ******");
+        System.out.println("******* 6.Salir             ******");
         System.out.println("**********************************");
         System.out.println("**********************************");
     }
@@ -125,12 +126,11 @@ public class Utilidades {
      *
      * @author jaime y ricardo g
      * @param br
-     * @return 
+     * @return
      * @throws java.io.IOException
      */
     //Falta cambiar si en vez de la edad vamos a pedir la fecha de nacimiento
-
-     public  LocalDate obtenerFechaNacimientoValida(BufferedReader br) throws IOException {
+    public LocalDate obtenerFechaNacimientoValida(BufferedReader br) throws IOException {
         while (true) {
             System.out.println("Introduce la fecha de nacimiento en el formato 'YYYY-MM-DD': ");
             String fechaNacimientoStr = br.readLine();
@@ -200,10 +200,7 @@ public class Utilidades {
      *
      * @author jaime
      */
-    
-    
-    
-    public void MenúDeInicio() throws AWTException, InterruptedException{
+    public void MenúDeInicio() throws AWTException, InterruptedException {
         System.out.println("************************************************************************");
         System.out.println("************************************************************************");
         System.out.println("**                      BIENVENIDO A NUESTRA APP                      **");
@@ -222,10 +219,9 @@ public class Utilidades {
         System.out.println("************************************************");
         System.out.println("************************************************");
         System.out.print("---->>");
-        
-        
+
     }
-    
+
     /**
      * @author Julián
      */
@@ -246,7 +242,7 @@ public class Utilidades {
         System.out.println("****************************************");
 
     }
-    
+
     /**
      * @author Julián
      */
@@ -258,7 +254,7 @@ public class Utilidades {
 
         return marca;
     }
-    
+
     /**
      * @author Julián
      */
@@ -270,7 +266,7 @@ public class Utilidades {
 
         return modelo;
     }
-    
+
     public static void cls() throws AWTException, InterruptedException {
         Robot robot = new Robot();
         Thread.sleep(3000);

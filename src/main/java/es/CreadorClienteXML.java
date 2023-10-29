@@ -2,7 +2,6 @@ package es;
 
 import java.io.File;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import javax.xml.parsers.DocumentBuilder;
@@ -11,14 +10,14 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.w3c.dom.Text;
 
 
 
 /**
  *
- * @author ricar
+ * @author Ricardo Gómez Ramos & Ricardo Gómez 
  */
 public class CreadorClienteXML {
     
@@ -52,10 +51,12 @@ public class CreadorClienteXML {
             doc = docBuilder.newDocument();
             Element rootElement = doc.createElement(CLIENTES);
             doc.appendChild(rootElement);
+            doc.appendChild(doc.createTextNode("\n"));
         }
 
         // Crear el elemento para representar el nuevo cliente
         Element clienteElement = doc.createElement(CLIENTE);
+        clienteElement.appendChild(doc.createTextNode("\n")); // Línea vacía
 
         // Crear elementos para los atributos del cliente
         Element nombreElement = doc.createElement(NOMBRE);
@@ -150,5 +151,60 @@ public class CreadorClienteXML {
         e.printStackTrace();
     }
 }
+    /**
+     * @author Ricardo Gómez Ramos & Ricardo Gómez Bastante
+     * @param xmlFichero 
+     */
+    public static void conversorXMLToHTML(String xmlFichero) {
+        try {
+            // Cargar el archivo XML
+            File xmlFile = new File(xmlFichero);
+
+            if (!xmlFile.exists()) {
+                System.out.println("El archivo XML no existe.");
+                return;
+            }
+
+            // Crear un documento XML a partir del archivo
+            DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+            Document doc = docBuilder.parse(xmlFile);
+
+            // Crear el elemento raíz
+            Element rootElement = doc.createElement("html");
+            doc.appendChild(rootElement);
+
+            // Crear un elemento "body"
+            Element bodyElement = doc.createElement("body");
+            rootElement.appendChild(bodyElement);
+
+            // Crear elementos HTML a partir de datos en el XML
+            Element h1Element = doc.createElement("h1");
+            Text h1Text = doc.createTextNode("Título del HTML");
+            h1Element.appendChild(h1Text);
+            bodyElement.appendChild(h1Element);
+
+            Element pElement = doc.createElement("p");
+            Text pText = doc.createTextNode("Este es un párrafo en el HTML.");
+            pElement.appendChild(pText);
+            bodyElement.appendChild(pElement);
+
+            // Especifica la ubicación del archivo HTML de salida
+            File htmlFile = new File("clientes.html");
+
+            // Prepara la transformación para convertir el documento DOM a un archivo HTML
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            DOMSource source = new DOMSource(doc);
+            StreamResult result = new StreamResult(htmlFile);
+
+            // Realiza la transformación
+            transformer.transform(source, result);
+
+            System.out.println("Documento HTML generado exitosamente.");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     
 }
