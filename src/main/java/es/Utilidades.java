@@ -217,13 +217,60 @@ public class Utilidades {
         System.out.println("************************************************");
         System.out.println("******* 1.Ir al menú de clientes          ******");
         System.out.println("******* 2.Ir al menú de concesionarios    ******");
-        System.out.println("******* 3.Salir                           ******");
+        System.out.println("******* 3.Ir al menú de coches            ******");
+        System.out.println("******* 4.Salir                           ******");
         System.out.println("************************************************");
         System.out.println("************************************************");
         System.out.print("---->>");
         
         
     }
+    
+    /**
+     * @author Julián
+     */
+    public void MenuConches() {
+
+        System.out.println("******************************************************************");
+        System.out.println("******************************************************************");
+        System.out.println("**                        MENÚ COCHES                           **");
+        System.out.println("******************************************************************");
+        System.out.println("******************************************************************");
+        System.out.println("");
+        System.out.println("****************************************");
+        System.out.println("****************************************");
+        System.out.println("******* 1.Crear Choche            ******");
+        System.out.println("******* 2.Buscar Coche            ******");
+        System.out.println("******* 3.Salir                   ******");
+        System.out.println("****************************************");
+        System.out.println("****************************************");
+
+    }
+    
+    /**
+     * @author Julián
+     */
+    public String PedirMarcaCoche() throws IOException {
+        String marca;
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Marca-->");
+        marca = br.readLine();
+
+        return marca;
+    }
+    
+    /**
+     * @author Julián
+     */
+    public String PedirModeloCoche() throws IOException {
+        String modelo;
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Modelo-->");
+        modelo = br.readLine();
+
+        return modelo;
+    }
+    
     public static void cls() throws AWTException, InterruptedException {
         Robot robot = new Robot();
         Thread.sleep(3000);
