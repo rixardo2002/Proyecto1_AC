@@ -52,10 +52,10 @@ public class Proyecto_AC_app {
                                 clienteAFile(cliente);
                                 
                                 // Generar y guardar el archivo XML del cliente
-                                generarXMLCliente(cliente);
+                                agregarClienteAClientesXML(cliente);
+                                
                                     
-                                // Leer y mostrar los datos del cliente desde el archivo XML
-                                leerXMLCliente(cliente);
+                                leerClientesDesdeXML();
             
                                 break;
 

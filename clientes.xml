@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><Clientes><Cliente><Nombre>pablo</Nombre>
+<NumeroTlf>694448449</NumeroTlf>
+<Ciudad>madrid</Ciudad>
+<Fecha_nac>2002-12-12</Fecha_nac>
+<NIF>05748590k</NIF></Cliente>
+<Cliente><Nombre>miriam</Nombre>
+<NumeroTlf>565565565</NumeroTlf>
+<Ciudad>barcelona</Ciudad>
+<Fecha_nac>2001-12-02</Fecha_nac>
+<NIF>05735268E</NIF></Cliente>
+</Clientes>
